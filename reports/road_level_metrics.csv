@@ -1,0 +1,17 @@
+road,area,test_observations,mae,rmse
+Sarjapur Road,Koramangala,101,9.625,13.896
+Sony World Junction,Koramangala,98,10.029,14.79
+Trinity Circle,M.G. Road,109,12.522,17.579
+Anil Kumble Circle,M.G. Road,120,12.546,17.272
+100 Feet Road,Indiranagar,126,15.425,19.495
+CMH Road,Indiranagar,127,15.754,20.34
+Hosur Road,Electronic City,50,17.061,20.703
+Yeshwanthpur Circle,Yeshwanthpur,48,18.48,22.636
+Tumkur Road,Yeshwanthpur,63,18.882,22.522
+South End Circle,Jayanagar,86,19.895,22.973
+Silk Board Junction,Electronic City,41,20.07,24.281
+Ballari Road,Hebbal,64,20.125,23.555
+Jayanagar 4th Block,Jayanagar,77,20.592,24.322
+Marathahalli Bridge,Whitefield,73,21.076,24.579
+ITPL Main Road,Whitefield,66,21.231,25.804
+Hebbal Flyover,Hebbal,73,21.352,25.224

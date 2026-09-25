@@ -1,0 +1,39 @@
+{
+  "model_version": "1.0.0",
+  "city": "Bengaluru, India",
+  "project": "CITYFLOW AI",
+  "creation_timestamp": "2026-09-25T06:47:56.453645Z",
+  "dataset_rows": 8920,
+  "train_date_range": [
+    "2022-01-01",
+    "2023-10-27"
+  ],
+  "val_date_range": [
+    "2023-10-28",
+    "2024-03-18"
+  ],
+  "test_date_range": [
+    "2024-03-19",
+    "2024-08-08"
+  ],
+  "models": {
+    "congestion": {
+      "algorithm": "RandomForest (Tuned)",
+      "test_mae": 16.342871958097593,
+      "test_rmse": 20.836183104641112,
+      "test_r2": 0.24018568655988493
+    },
+    "traffic_volume": {
+      "algorithm": "RandomForest (Tuned)",
+      "test_mae": 8565.711066257343,
+      "test_rmse": 10583.637827514265,
+      "test_r2": 0.32372062098421084
+    },
+    "average_speed": {
+      "algorithm": "LinearRegression",
+      "test_mae": 8.419626482960437,
+      "test_rmse": 10.568840539116787,
+      "test_r2": 0.004775453679472075
+    }
+  }
+}

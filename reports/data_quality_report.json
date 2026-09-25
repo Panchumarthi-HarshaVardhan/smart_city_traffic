@@ -1,0 +1,410 @@
+{
+  "generated_at": "2026-09-25 12:14:00",
+  "traffic": {
+    "shape": {
+      "rows": 8936,
+      "columns": 16
+    },
+    "column_names": [
+      "Date",
+      "Area Name",
+      "Road/Intersection Name",
+      "Traffic Volume",
+      "Average Speed",
+      "Travel Time Index",
+      "Congestion Level",
+      "Road Capacity Utilization",
+      "Incident Reports",
+      "Environmental Impact",
+      "Public Transport Usage",
+      "Traffic Signal Compliance",
+      "Parking Usage",
+      "Pedestrian and Cyclist Count",
+      "Weather Conditions",
+      "Roadwork and Construction Activity"
+    ],
+    "dtypes": {
+      "Date": "object",
+      "Area Name": "object",
+      "Road/Intersection Name": "object",
+      "Traffic Volume": "int64",
+      "Average Speed": "float64",
+      "Travel Time Index": "float64",
+      "Congestion Level": "float64",
+      "Road Capacity Utilization": "float64",
+      "Incident Reports": "int64",
+      "Environmental Impact": "float64",
+      "Public Transport Usage": "float64",
+      "Traffic Signal Compliance": "float64",
+      "Parking Usage": "float64",
+      "Pedestrian and Cyclist Count": "int64",
+      "Weather Conditions": "object",
+      "Roadwork and Construction Activity": "object"
+    },
+    "missing_values": {
+      "per_column": {
+        "Date": 0,
+        "Area Name": 0,
+        "Road/Intersection Name": 0,
+        "Traffic Volume": 0,
+        "Average Speed": 0,
+        "Travel Time Index": 0,
+        "Congestion Level": 0,
+        "Road Capacity Utilization": 0,
+        "Incident Reports": 0,
+        "Environmental Impact": 0,
+        "Public Transport Usage": 0,
+        "Traffic Signal Compliance": 0,
+        "Parking Usage": 0,
+        "Pedestrian and Cyclist Count": 0,
+        "Weather Conditions": 0,
+        "Roadwork and Construction Activity": 0
+      },
+      "total": 0
+    },
+    "duplicate_rows": 0,
+    "duplicate_date_road": 0,
+    "date_range": {
+      "min": "2022-01-01 00:00:00",
+      "max": "2024-08-09 00:00:00",
+      "invalid_dates_count": 0
+    },
+    "unique_dates_count": 952,
+    "unique_roads": {
+      "count": 16,
+      "list": [
+        "100 Feet Road",
+        "Anil Kumble Circle",
+        "Ballari Road",
+        "CMH Road",
+        "Hebbal Flyover",
+        "Hosur Road",
+        "ITPL Main Road",
+        "Jayanagar 4th Block",
+        "Marathahalli Bridge",
+        "Sarjapur Road",
+        "Silk Board Junction",
+        "Sony World Junction",
+        "South End Circle",
+        "Trinity Circle",
+        "Tumkur Road",
+        "Yeshwanthpur Circle"
+      ]
+    },
+    "unique_areas": {
+      "count": 8,
+      "list": [
+        "Electronic City",
+        "Hebbal",
+        "Indiranagar",
+        "Jayanagar",
+        "Koramangala",
+        "M.G. Road",
+        "Whitefield",
+        "Yeshwanthpur"
+      ]
+    },
+    "numerical_statistics": {
+      "Traffic Volume": {
+        "min": 4233.0,
+        "max": 72039.0,
+        "mean": 29236.04811996419,
+        "std": 13001.80880124022,
+        "Q25": 19413.0,
+        "Q50": 27600.0,
+        "Q75": 38058.5
+      },
+      "Average Speed": {
+        "min": 20.0,
+        "max": 89.79084251025756,
+        "mean": 39.447426957306334,
+        "std": 10.707243504178408,
+        "Q25": 31.77582544479728,
+        "Q50": 39.19936750476889,
+        "Q75": 46.64451658369029
+      },
+      "Travel Time Index": {
+        "min": 1.0000385482661114,
+        "max": 1.5,
+        "mean": 1.3755535780105832,
+        "std": 0.16531908064704595,
+        "Q25": 1.2424591417816073,
+        "Q50": 1.5,
+        "Q75": 1.5
+      },
+      "Congestion Level": {
+        "min": 5.160279008043586,
+        "max": 100.0,
+        "mean": 80.81804073595616,
+        "std": 23.533181668791784,
+        "Q25": 64.29290530056555,
+        "Q50": 92.3890177528522,
+        "Q75": 100.0
+      },
+      "Road Capacity Utilization": {
+        "min": 18.73977149973116,
+        "max": 100.0,
+        "mean": 92.02921519093537,
+        "std": 16.583340892161335,
+        "Q25": 97.35499038137552,
+        "Q50": 100.0,
+        "Q75": 100.0
+      },
+      "Incident Reports": {
+        "min": 0.0,
+        "max": 10.0,
+        "mean": 1.570389435989257,
+        "std": 1.4200469362090404,
+        "Q25": 0.0,
+        "Q50": 1.0,
+        "Q75": 2.0
+      },
+      "Environmental Impact": {
+        "min": 58.466,
+        "max": 194.078,
+        "mean": 108.47209623992839,
+        "std": 26.00361760248044,
+        "Q25": 88.826,
+        "Q50": 105.2,
+        "Q75": 126.117
+      },
+      "Public Transport Usage": {
+        "min": 10.006853048659872,
+        "max": 79.9797440870127,
+        "mean": 45.0866507164033,
+        "std": 20.20846035495427,
+        "Q25": 27.34119058168643,
+        "Q50": 45.170683932793196,
+        "Q75": 62.426484865379145
+      },
+      "Traffic Signal Compliance": {
+        "min": 60.003932901833785,
+        "max": 99.99365201991688,
+        "mean": 79.95024301211953,
+        "std": 11.58500563950619,
+        "Q25": 69.82826996494421,
+        "Q50": 79.99277332285236,
+        "Q75": 89.95735778538753
+      },
+      "Parking Usage": {
+        "min": 50.020411058262646,
+        "max": 99.9950488504616,
+        "mean": 75.15559684464662,
+        "std": 14.409394159203623,
+        "Q25": 62.545895067464215,
+        "Q50": 75.31761047130715,
+        "Q75": 87.5185886621826
+      },
+      "Pedestrian and Cyclist Count": {
+        "min": 66.0,
+        "max": 243.0,
+        "mean": 114.53334825425246,
+        "std": 36.8125730665883,
+        "Q25": 94.0,
+        "Q50": 102.0,
+        "Q75": 111.0
+      }
+    },
+    "categorical_value_counts": {
+      "Weather Conditions": {
+        "Clear": 5426,
+        "Overcast": 1296,
+        "Fog": 959,
+        "Rain": 827,
+        "Windy": 428
+      },
+      "Roadwork and Construction Activity": {
+        "No": 8054,
+        "Yes": 882
+      },
+      "Area Name": {
+        "Indiranagar": 1720,
+        "M.G. Road": 1501,
+        "Koramangala": 1364,
+        "Jayanagar": 1173,
+        "Hebbal": 950,
+        "Whitefield": 942,
+        "Yeshwanthpur": 734,
+        "Electronic City": 552
+      },
+      "Road/Intersection Name": {
+        "100 Feet Road": 860,
+        "CMH Road": 860,
+        "Anil Kumble Circle": 759,
+        "Trinity Circle": 742,
+        "Sony World Junction": 684,
+        "Sarjapur Road": 680,
+        "South End Circle": 593,
+        "Jayanagar 4th Block": 580,
+        "Marathahalli Bridge": 492,
+        "Ballari Road": 476,
+        "Hebbal Flyover": 474,
+        "ITPL Main Road": 450,
+        "Yeshwanthpur Circle": 373,
+        "Tumkur Road": 361,
+        "Hosur Road": 277,
+        "Silk Board Junction": 275
+      }
+    },
+    "infinite_values": {
+      "per_column": {},
+      "total": 0
+    },
+    "outliers_iqr": {
+      "Traffic Volume": {
+        "count": 24,
+        "lower_bound": -8555.25,
+        "upper_bound": 66026.75,
+        "min_outlier": 66047.0,
+        "max_outlier": 72039.0
+      },
+      "Average Speed": {
+        "count": 33,
+        "lower_bound": 9.472788736457769,
+        "upper_bound": 68.9475532920298,
+        "min_outlier": 68.99070646986311,
+        "max_outlier": 89.79084251025756
+      },
+      "Congestion Level": {
+        "count": 3,
+        "lower_bound": 10.732263251413876,
+        "upper_bound": 153.56064204915168,
+        "min_outlier": 5.160279008043586,
+        "max_outlier": 8.744589385743625
+      },
+      "Road Capacity Utilization": {
+        "count": 2078,
+        "lower_bound": 93.38747595343878,
+        "upper_bound": 103.96751442793672,
+        "min_outlier": 18.73977149973116,
+        "max_outlier": 93.36443381313084
+      },
+      "Incident Reports": {
+        "count": 100,
+        "lower_bound": -3.0,
+        "upper_bound": 5.0,
+        "min_outlier": 6.0,
+        "max_outlier": 10.0
+      },
+      "Environmental Impact": {
+        "count": 24,
+        "lower_bound": 32.88949999999998,
+        "upper_bound": 182.0535,
+        "min_outlier": 182.094,
+        "max_outlier": 194.078
+      },
+      "Pedestrian and Cyclist Count": {
+        "count": 1316,
+        "lower_bound": 68.5,
+        "upper_bound": 136.5,
+        "min_outlier": 66.0,
+        "max_outlier": 243.0
+      }
+    }
+  },
+  "weather": {
+    "metadata": {
+      "latitude": 12.970123,
+      "longitude": 77.56364,
+      "elevation": 910.0,
+      "utc_offset_seconds": 19800.0,
+      "timezone": "Asia/Kolkata",
+      "timezone_abbreviation": "GMT+5:30"
+    },
+    "shape": {
+      "rows": 22848,
+      "columns": 7
+    },
+    "column_names": [
+      "time",
+      "temperature_2m (°C)",
+      "relative_humidity_2m (%)",
+      "precipitation (mm)",
+      "rain (mm)",
+      "wind_speed_10m (km/h)",
+      "weather_code (wmo code)"
+    ],
+    "dtypes": {
+      "time": "object",
+      "temperature_2m (°C)": "float64",
+      "relative_humidity_2m (%)": "int64",
+      "precipitation (mm)": "float64",
+      "rain (mm)": "float64",
+      "wind_speed_10m (km/h)": "float64",
+      "weather_code (wmo code)": "int64"
+    },
+    "missing_values": {
+      "per_column": {
+        "time": 0,
+        "temperature_2m (°C)": 0,
+        "relative_humidity_2m (%)": 0,
+        "precipitation (mm)": 0,
+        "rain (mm)": 0,
+        "wind_speed_10m (km/h)": 0,
+        "weather_code (wmo code)": 0
+      },
+      "total": 0
+    },
+    "date_range": {
+      "min": "2022-01-01 00:00:00",
+      "max": "2024-08-09 23:00:00"
+    },
+    "duplicate_timestamps": 0,
+    "numerical_statistics": {
+      "temperature_2m (°C)": {
+        "min": 11.9,
+        "max": 39.5,
+        "mean": 23.557033438375353,
+        "std": 4.369221473072395,
+        "Q25": 20.4,
+        "Q50": 22.8,
+        "Q75": 26.5
+      },
+      "relative_humidity_2m (%)": {
+        "min": 10.0,
+        "max": 100.0,
+        "mean": 68.48201155462185,
+        "std": 23.349119111333085,
+        "Q25": 52.0,
+        "Q50": 72.0,
+        "Q75": 90.0
+      },
+      "precipitation (mm)": {
+        "min": 0.0,
+        "max": 12.8,
+        "mean": 0.10986957282913164,
+        "std": 0.5654464590472443,
+        "Q25": 0.0,
+        "Q50": 0.0,
+        "Q75": 0.0
+      },
+      "rain (mm)": {
+        "min": 0.0,
+        "max": 12.8,
+        "mean": 0.10986957282913164,
+        "std": 0.5654464590472443,
+        "Q25": 0.0,
+        "Q50": 0.0,
+        "Q75": 0.0
+      },
+      "wind_speed_10m (km/h)": {
+        "min": 0.0,
+        "max": 39.3,
+        "mean": 12.468539915966387,
+        "std": 5.30607285834638,
+        "Q25": 8.7,
+        "Q50": 12.0,
+        "Q75": 15.6
+      },
+      "weather_code (wmo code)": {
+        "min": 0.0,
+        "max": 65.0,
+        "mean": 10.699098389355742,
+        "std": 19.312731196449896,
+        "Q25": 1.0,
+        "Q50": 3.0,
+        "Q75": 3.0
+      }
+    }
+  }
+}
