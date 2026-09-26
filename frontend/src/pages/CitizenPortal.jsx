@@ -1,191 +1,138 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Compass, MapPin, ArrowRight, Clock, Navigation, AlertCircle } from 'lucide-react';
-import { BENGALURU_AREAS } from '../data/roads';
-import { routeService } from '../services/routeService';
-import { trafficService } from '../services/trafficService';
-import { predictionService } from '../services/predictionService';
-import RouteCard from '../components/RouteCard';
-import RouteComparison from '../components/RouteComparison';
-import TrafficMap from '../components/TrafficMap';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { MapPin, Navigation, ArrowRight, Activity, ShieldCheck, Sparkles, Compass } from 'lucide-react';
 
 export default function CitizenPortal() {
-  const [fromArea, setFromArea] = useState('Electronic City');
-  const [toArea, setToArea] = useState('Hebbal');
-  const [routes, setRoutes] = useState([]);
-  const [selectedRoute, setSelectedRoute] = useState(null);
-  const [roads, setRoads] = useState([]);
-  const [predictions, setPredictions] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [fromQuery, setFromQuery] = useState('');
+  const [toQuery, setToQuery] = useState('');
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    // Load road nodes & predictions for the map
-    Promise.all([trafficService.getAllRoads(), predictionService.getAllPredictions()]).then(
-      ([allRoads, allPreds]) => {
-        setRoads(allRoads);
-        const map = {};
-        allPreds.forEach((p) => {
-          map[p.road] = p;
-        });
-        setPredictions(map);
-      }
-    );
-
-    // Initial search
-    handleSearch('Electronic City', 'Hebbal');
-  }, []);
-
-  const handleSearch = async (from = fromArea, to = toArea) => {
-    if (from === to) return;
-    setLoading(true);
-    const results = await routeService.findRoutes(from, to);
-    setRoutes(results);
-    setSelectedRoute(results[0] || null);
-    setLoading(false);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (fromQuery.trim()) params.set('from', fromQuery.trim());
+    if (toQuery.trim()) params.set('to', toQuery.trim());
+    navigate(`/citizen/route?${params.toString()}`);
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
-      {/* Header */}
-      <div className="space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-elevated border border-surface-border text-xs font-mono text-accent">
-          <Compass className="w-3.5 h-3.5" />
-          <span>Citizen Route Navigation</span>
+    <div className="min-h-[85vh] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      {/* Hero Header */}
+      <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-light dark:bg-sky-950/60 text-accent dark:text-sky-300 text-xs font-semibold mb-4">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Intelligent Urban Mobility</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-          Plan your journey with predicted traffic intelligence.
+
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight uppercase">
+          Plan Smarter. <br />
+          <span className="text-accent">Travel Better.</span>
         </h1>
-        <p className="text-slate-400 text-sm max-w-2xl leading-relaxed">
-          CITYFLOW AI evaluates corridor congestion trends to forecast travel delays, recommending routes based on predicted congestion rather than static free-flow assumptions.
+
+        <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
+          Find better routes and understand the traffic ahead with AI-powered urban intelligence.
         </p>
       </div>
 
-      {/* Query Bar */}
-      <div className="p-6 rounded-2xl bg-surface border border-surface-border shadow-xl space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
-          <div className="sm:col-span-5 space-y-1.5">
-            <label className="text-xs font-mono uppercase text-slate-400 font-medium">Origin (From)</label>
-            <div className="relative">
-              <select
-                value={fromArea}
-                onChange={(e) => setFromArea(e.target.value)}
-                className="w-full bg-background border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-accent font-medium appearance-none"
-              >
-                {BENGALURU_AREAS.map((area) => (
-                  <option key={area} value={area} disabled={area === toArea}>
-                    {area}
-                  </option>
-                ))}
-              </select>
+      {/* Main Journey Search Card */}
+      <div className="bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-soft-xl max-w-3xl mx-auto w-full mb-14 transition-colors">
+        <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+          <Navigation className="w-5 h-5 text-accent" />
+          <span>Where are you going?</span>
+        </h2>
+
+        <form onSubmit={handleSearch} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5 flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-accent" />
+                <span>FROM</span>
+              </label>
+              <input
+                type="text"
+                value={fromQuery}
+                onChange={(e) => setFromQuery(e.target.value)}
+                placeholder="Search a location in India (e.g. Hyderabad, Delhi)"
+                className="w-full px-4 py-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-surface-border dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-accent focus:bg-white dark:focus:bg-slate-800 transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5 flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-teal-600" />
+                <span>TO</span>
+              </label>
+              <input
+                type="text"
+                value={toQuery}
+                onChange={(e) => setToQuery(e.target.value)}
+                placeholder="Search destination (e.g. Bengaluru, Pune)"
+                className="w-full px-4 py-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-surface-border dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-accent focus:bg-white dark:focus:bg-slate-800 transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500"
+              />
             </div>
           </div>
 
-          <div className="sm:col-span-5 space-y-1.5">
-            <label className="text-xs font-mono uppercase text-slate-400 font-medium">Destination (To)</label>
-            <div className="relative">
-              <select
-                value={toArea}
-                onChange={(e) => setToArea(e.target.value)}
-                className="w-full bg-background border border-surface-border rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-accent font-medium appearance-none"
-              >
-                {BENGALURU_AREAS.map((area) => (
-                  <option key={area} value={area} disabled={area === fromArea}>
-                    {area}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="sm:col-span-2">
-            <button
-              onClick={() => handleSearch(fromArea, toArea)}
-              disabled={loading || fromArea === toArea}
-              className="w-full py-2.5 px-4 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-all flex items-center justify-center gap-1.5 shadow-sm shadow-accent/20 disabled:opacity-50"
-            >
-              {loading ? <span>Analyzing...</span> : <span>Find Routes</span>}
-            </button>
-          </div>
-        </div>
-
-        {/* Quick query presets */}
-        <div className="flex flex-wrap items-center gap-2 pt-2 text-xs text-slate-400">
-          <span className="font-mono text-slate-400">Popular Commutes:</span>
-          {[
-            ['Electronic City', 'Hebbal'],
-            ['Koramangala', 'Whitefield'],
-            ['Indiranagar', 'Yeshwanthpur'],
-            ['Jayanagar', 'M.G. Road'],
-          ].map(([f, t], idx) => (
-            <button
-              key={idx}
-              onClick={() => {
-                setFromArea(f);
-                setToArea(t);
-                handleSearch(f, t);
-              }}
-              className="px-2.5 py-1 rounded-md bg-surface-elevated hover:bg-surface-border text-slate-300 font-mono text-[11px] transition-colors"
-            >
-              {f} → {t}
-            </button>
-          ))}
-        </div>
+          <button
+            type="submit"
+            className="w-full py-4 px-6 rounded-2xl bg-accent hover:bg-accent-hover text-white font-bold text-sm transition-all shadow-md shadow-accent/25 flex items-center justify-center gap-2"
+          >
+            <span>Find Routes</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </form>
       </div>
 
-      {/* Main Grid: Routes List & Interactive Map */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Left: Route Alternatives */}
-        <div className="lg:col-span-5 space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-surface-border">
-            <div className="flex items-center gap-2">
-              <Navigation className="w-4 h-4 text-accent" />
-              <h3 className="text-sm font-semibold text-white uppercase tracking-wider font-mono">
-                Route Alternatives ({routes.length})
-              </h3>
-            </div>
-            <span className="text-xs font-mono text-slate-400">Sorted by Predicted Delay</span>
-          </div>
-
-          {routes.map((route) => (
-            <RouteCard
-              key={route.id}
-              route={route}
-              isSelected={selectedRoute && selectedRoute.id === route.id}
-              onSelect={() => setSelectedRoute(route)}
-            />
-          ))}
-
-          {/* Quick links to deeper explorer */}
-          <div className="p-4 rounded-xl bg-surface/50 border border-surface-border text-xs flex items-center justify-between text-slate-400">
-            <span>Want to inspect all 16 city corridors?</span>
-            <Link to="/citizen/traffic" className="text-accent hover:underline flex items-center gap-1 font-medium">
-              <span>View Traffic Map</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Right: Map & Comparison */}
-        <div className="lg:col-span-7 space-y-6">
-          <RouteComparison routes={routes} />
-
+      {/* Two Direct Action Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto w-full">
+        {/* Card 1: Plan Journey */}
+        <Link
+          to="/citizen/route"
+          className="group bg-white dark:bg-slate-900 hover:bg-sky-50/40 dark:hover:bg-slate-800/80 border border-surface-border dark:border-slate-800 hover:border-accent/40 rounded-3xl p-7 transition-all shadow-soft hover:shadow-soft-lg flex flex-col justify-between"
+        >
           <div>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">
-                {selectedRoute ? `Route Visualization: ${selectedRoute.name}` : 'Corridor Overview'}
-              </span>
-              <span className="text-[11px] font-mono text-slate-400">Live OSRM Geometry + AI Forecast Overlay</span>
+            <div className="w-12 h-12 rounded-2xl bg-accent-light dark:bg-sky-950/60 text-accent dark:text-sky-300 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+              <Compass className="w-6 h-6" />
             </div>
 
-            <TrafficMap
-              roads={roads}
-              predictions={predictions}
-              activeRoute={selectedRoute}
-              height="540px"
-              zoom={11}
-            />
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+              Plan Journey
+            </h3>
+
+            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 font-normal">
+              Explore driving routes, estimated travel times, distance calculations, and traffic conditions across Indian road networks.
+            </p>
           </div>
-        </div>
+
+          <div className="inline-flex items-center gap-1.5 text-accent font-bold text-sm group-hover:translate-x-1 transition-transform">
+            <span>Open Route Planner</span>
+            <ArrowRight className="w-4 h-4" />
+          </div>
+        </Link>
+
+        {/* Card 2: Traffic Prediction */}
+        <Link
+          to="/citizen/traffic"
+          className="group bg-white dark:bg-slate-900 hover:bg-sky-50/40 dark:hover:bg-slate-800/80 border border-surface-border dark:border-slate-800 hover:border-accent/40 rounded-3xl p-7 transition-all shadow-soft hover:shadow-soft-lg flex flex-col justify-between"
+        >
+          <div>
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+              <Activity className="w-6 h-6" />
+            </div>
+
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+              Traffic Prediction
+            </h3>
+
+            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 font-normal">
+              Check expected traffic conditions, vehicle volumes, and speed forecasts for key corridors before heading out.
+            </p>
+          </div>
+
+          <div className="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-bold text-sm group-hover:translate-x-1 transition-transform">
+            <span>Forecast Road Traffic</span>
+            <ArrowRight className="w-4 h-4" />
+          </div>
+        </Link>
       </div>
     </div>
   );

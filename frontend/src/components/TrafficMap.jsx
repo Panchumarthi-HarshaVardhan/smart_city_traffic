@@ -41,10 +41,21 @@ export default function TrafficMap({
         scrollWheelZoom={true}
         className="w-full h-full"
       >
-        {/* Minimal Dark Tiles (CartoDB Dark Matter) */}
+        {/* MapTiler Streets v2 Tile Layer */}
         <TileLayer
-          attribution='&copy; <a href="https://carto.com/">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+          attribution={
+            import.meta.env.VITE_MAPTILER_API_KEY
+              ? '&copy; <a href="https://www.maptiler.com/" target="_blank" rel="noopener noreferrer">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'
+              : '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'
+          }
+          url={
+            import.meta.env.VITE_MAPTILER_API_KEY
+              ? `https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=${import.meta.env.VITE_MAPTILER_API_KEY}`
+              : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+          }
+          maxZoom={19}
+          tileSize={512}
+          zoomOffset={-1}
         />
 
         {/* Active Route Polyline if present */}

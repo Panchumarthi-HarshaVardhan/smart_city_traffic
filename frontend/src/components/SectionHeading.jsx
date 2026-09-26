@@ -8,11 +8,11 @@ export default function SectionHeading({ number, title, subtitle, align = 'left'
           {number}
         </div>
       )}
-      <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white mb-3">
+      <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white mb-3">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+        <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
           {subtitle}
         </p>
       )}
